@@ -1,0 +1,17 @@
+services:
+  runner:
+    build:
+      context: .
+      args:
+        WITH_DOCKER: "1"
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      BOT_ROOT: /data/bots
+      SANDBOX: docker
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
